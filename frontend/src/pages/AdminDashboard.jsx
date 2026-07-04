@@ -72,7 +72,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="container py-5 fade-in">
-      {/* Toast Alert */}
       {toast && (
         <div className="toast-container-custom">
           <div className={`toast-custom border-start border-4 ${toast.type === 'success' ? 'border-success' : 'border-danger'}`}>
@@ -87,54 +86,41 @@ const AdminDashboard = () => {
         </div>
       )}
 
-      {/* Header */}
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-5">
         <div>
-          <h1 className="fw-extrabold heading-font display-6 mb-1">Librarian Dashboard</h1>
-          <p className="text-muted mb-0">Inventory Control Panel & Shelf Location Registrar</p>
+          <div className="section-chip mb-2">Inventory control</div>
+          <h1 className="fw-extrabold heading-font display-6 mb-1">Librarian dashboard</h1>
+          <p className="text-muted mb-0">Monitor availability, update records, and manage the catalog in one place.</p>
         </div>
         <Link to="/admin/add-book" className="btn btn-primary rounded-pill px-4 d-flex align-items-center gap-2">
-          <i className="bi bi-plus-lg"></i> Add New Book
+          <i className="bi bi-plus-lg"></i> Add new book
         </Link>
       </div>
 
-      {/* Statistics Cards */}
       <div className="row g-4 mb-5">
-        <div className="col-md-3 col-6">
-          <div className="glass-card p-4 border-0 shadow-sm text-center">
-            <h4 className="text-muted heading-font small text-uppercase">Total Book Titles</h4>
-            <h2 className="fw-extrabold mb-0 mt-2">{stats.totalBooks}</h2>
+        {[
+          { label: 'Total titles', value: stats.totalBooks, tone: 'var(--primary-color)' },
+          { label: 'Available', value: stats.availableBooks, tone: 'var(--success-color)' },
+          { label: 'Borrowed / out', value: stats.borrowedBooks, tone: 'var(--danger-color)' },
+          { label: 'Categories', value: stats.totalCategories, tone: 'var(--accent-color)' }
+        ].map((stat, idx) => (
+          <div className="col-md-3 col-6" key={idx}>
+            <div className="glass-card p-4 border-0 shadow-sm text-center">
+              <h4 className="text-muted heading-font small text-uppercase">{stat.label}</h4>
+              <h2 className="fw-extrabold mb-0 mt-2" style={{ color: stat.tone }}>{stat.value}</h2>
+            </div>
           </div>
-        </div>
-        <div className="col-md-3 col-6">
-          <div className="glass-card p-4 border-0 shadow-sm text-center">
-            <h4 className="text-muted heading-font small text-uppercase">Available Titles</h4>
-            <h2 className="fw-extrabold text-success mb-0 mt-2">{stats.availableBooks}</h2>
-          </div>
-        </div>
-        <div className="col-md-3 col-6">
-          <div className="glass-card p-4 border-0 shadow-sm text-center">
-            <h4 className="text-muted heading-font small text-uppercase">Borrowed / Out</h4>
-            <h2 className="fw-extrabold text-danger mb-0 mt-2">{stats.borrowedBooks}</h2>
-          </div>
-        </div>
-        <div className="col-md-3 col-6">
-          <div className="glass-card p-4 border-0 shadow-sm text-center">
-            <h4 className="text-muted heading-font small text-uppercase">Active Categories</h4>
-            <h2 className="fw-extrabold text-info mb-0 mt-2">{stats.totalCategories}</h2>
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* Book Management Inventory */}
       <div className="glass-card p-4 border-0 shadow-sm">
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
-          <h4 className="fw-bold heading-font mb-0">Book Inventory</h4>
-          
-          <div className="d-flex gap-2" style={{ maxWidth: '350px', width: '100%' }}>
-            <input 
-              type="text" 
-              className="form-control rounded-pill px-3 py-2" 
+          <h4 className="fw-bold heading-font mb-0">Book inventory</h4>
+
+          <div className="d-flex gap-2" style={{ maxWidth: '360px', width: '100%' }}>
+            <input
+              type="text"
+              className="form-control rounded-pill px-3 py-2"
               placeholder="Filter by title, author, ISBN..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -144,7 +130,7 @@ const AdminDashboard = () => {
 
         {loading ? (
           <div className="text-center py-5">
-            <div className="spinner-border text-primary" role="status">
+            <div className="spinner-border" role="status" style={{ color: 'var(--primary-color)' }}>
               <span className="visually-hidden">Loading...</span>
             </div>
           </div>
@@ -157,12 +143,12 @@ const AdminDashboard = () => {
           <div className="table-responsive">
             <table className="table align-middle text-muted" style={{ borderCollapse: 'separate', borderSpacing: '0 8px' }}>
               <thead>
-                <tr className="text-white border-bottom border-secondary border-opacity-10">
+                <tr>
                   <th style={{ width: '80px' }}>Cover</th>
-                  <th>Title & Author</th>
+                  <th>Title & author</th>
                   <th>Category</th>
                   <th>ISBN</th>
-                  <th>Shelf Location</th>
+                  <th>Shelf</th>
                   <th>Qty</th>
                   <th>Status</th>
                   <th className="text-end" style={{ width: '150px' }}>Actions</th>
@@ -172,9 +158,9 @@ const AdminDashboard = () => {
                 {filteredBooks.map((book) => (
                   <tr key={book.id} className="border-bottom border-secondary border-opacity-10">
                     <td>
-                      <img 
-                        src={book.imageUrl || `https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=100`} 
-                        alt={book.title} 
+                      <img
+                        src={book.imageUrl || `https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=100`}
+                        alt={book.title}
                         className="rounded"
                         style={{ width: '45px', height: '60px', objectFit: 'cover' }}
                         onError={(e) => {
@@ -183,13 +169,13 @@ const AdminDashboard = () => {
                       />
                     </td>
                     <td>
-                      <div className="fw-bold text-white mb-0 text-truncate" style={{ maxWidth: '250px' }}>{book.title}</div>
+                      <div className="fw-bold mb-0 text-truncate" style={{ maxWidth: '240px', color: 'var(--text-color)' }}>{book.title}</div>
                       <small className="text-muted">by {book.author}</small>
                     </td>
-                    <td><span className="badge bg-secondary rounded-pill px-2.5 py-1" style={{ fontSize: '0.8rem' }}>{book.category}</span></td>
-                    <td><code className="text-info">{book.isbn || 'N/A'}</code></td>
-                    <td><strong className="text-white">{book.shelfNumber}</strong></td>
-                    <td className="text-white">{book.quantity}</td>
+                    <td><span className="badge rounded-pill px-2.5 py-1" style={{ background: 'rgba(31, 111, 102, 0.12)', color: 'var(--primary-color)', fontSize: '0.8rem' }}>{book.category}</span></td>
+                    <td><code style={{ color: 'var(--accent-color)' }}>{book.isbn || 'N/A'}</code></td>
+                    <td><strong style={{ color: 'var(--text-color)' }}>{book.shelfNumber}</strong></td>
+                    <td style={{ color: 'var(--text-color)' }}>{book.quantity}</td>
                     <td>
                       <span className={`badge rounded-pill ${book.availability ? 'bg-success bg-opacity-25 text-success' : 'bg-danger bg-opacity-25 text-danger'}`}>
                         {book.availability ? 'Available' : 'Out'}
@@ -197,7 +183,7 @@ const AdminDashboard = () => {
                     </td>
                     <td className="text-end">
                       <div className="d-flex justify-content-end gap-2">
-                        <Link to={`/admin/edit-book/${book.id}`} className="btn btn-sm btn-outline-info rounded-circle d-flex align-items-center justify-content-center" style={{ width: '32px', height: '32px', padding: 0 }} title="Edit">
+                        <Link to={`/admin/edit-book/${book.id}`} className="btn btn-sm btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center" style={{ width: '32px', height: '32px', padding: 0 }} title="Edit">
                           <i className="bi bi-pencil-fill"></i>
                         </Link>
                         <button className="btn btn-sm btn-outline-danger rounded-circle d-flex align-items-center justify-content-center" style={{ width: '32px', height: '32px', padding: 0 }} onClick={() => handleDelete(book.id, book.title)} title="Delete">

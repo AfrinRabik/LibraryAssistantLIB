@@ -73,20 +73,19 @@ const BookDetails = () => {
   return (
     <div className="container py-5 fade-in">
       <div className="mb-4">
-        <Link to="/books" className="text-decoration-none text-muted">
-          <i className="bi bi-arrow-left me-1"></i> Back to Catalog
+        <Link to="/books" className="text-decoration-none" style={{ color: 'var(--text-muted)' }}>
+          <i className="bi bi-arrow-left me-1"></i> Back to catalog
         </Link>
       </div>
 
       <div className="row g-5">
-        {/* Book Image */}
         <div className="col-lg-4 text-center">
           <div className="glass-card p-3 border-0 rounded-4 shadow mb-4" style={{ display: 'inline-block' }}>
-            <img 
-              src={coverImage} 
-              alt={book.title} 
+            <img
+              src={coverImage}
+              alt={book.title}
               className="img-fluid rounded-3"
-              style={{ maxHeight: '420px', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.15)' }}
+              style={{ maxHeight: '430px', borderRadius: '14px', boxShadow: '0 16px 36px rgba(0,0,0,0.16)' }}
               onError={(e) => {
                 e.target.src = `https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=600`;
               }}
@@ -95,45 +94,44 @@ const BookDetails = () => {
 
           <div className="d-flex flex-column gap-2 mt-2">
             <button className="btn btn-primary rounded-pill d-flex align-items-center justify-content-center gap-2 py-3" onClick={handleAskAI}>
-              <i className="bi bi-robot"></i> Ask AI Assistant About This Book
+              <i className="bi bi-robot"></i> Ask AI assistant about this book
             </button>
             {isAdmin && (
-              <Link to={`/admin/edit-book/${book.id}`} className="btn btn-outline-info rounded-pill py-2">
-                <i className="bi bi-pencil-square me-1"></i> Edit Book Details
+              <Link to={`/admin/edit-book/${book.id}`} className="btn btn-outline-secondary rounded-pill py-2">
+                <i className="bi bi-pencil-square me-1"></i> Edit book details
               </Link>
             )}
           </div>
         </div>
 
-        {/* Book Details */}
         <div className="col-lg-8">
-          <div className="badge bg-secondary text-white rounded-pill px-3 py-1.5 mb-3">{book.category}</div>
+          <div className="section-chip mb-3">{book.category}</div>
           <h1 className="display-5 fw-extrabold heading-font mb-2">{book.title}</h1>
-          <h4 className="text-primary mb-4">by {book.author}</h4>
+          <h4 className="mb-4" style={{ color: 'var(--primary-color)' }}>by {book.author}</h4>
 
           <div className="row g-4 mb-4">
             <div className="col-md-6 col-lg-3 col-6">
-              <div className="border border-secondary border-opacity-10 rounded-3 p-3 text-center">
+              <div className="glass-card p-3 border-0 text-center h-100">
                 <small className="text-muted d-block text-uppercase mb-1">Availability</small>
                 <span className={`badge rounded-pill ${book.availability ? 'bg-success' : 'bg-danger'}`}>
-                  {book.availability ? 'Available' : 'Out of Stock'}
+                  {book.availability ? 'Available' : 'Out of stock'}
                 </span>
               </div>
             </div>
             <div className="col-md-6 col-lg-3 col-6">
-              <div className="border border-secondary border-opacity-10 rounded-3 p-3 text-center">
-                <small className="text-muted d-block text-uppercase mb-1">Shelf Number</small>
-                <strong className="text-info">{book.shelfNumber || 'N/A'}</strong>
+              <div className="glass-card p-3 border-0 text-center h-100">
+                <small className="text-muted d-block text-uppercase mb-1">Shelf</small>
+                <strong style={{ color: 'var(--primary-color)' }}>{book.shelfNumber || 'N/A'}</strong>
               </div>
             </div>
             <div className="col-md-6 col-lg-3 col-6">
-              <div className="border border-secondary border-opacity-10 rounded-3 p-3 text-center">
-                <small className="text-muted d-block text-uppercase mb-1">Stock Quantity</small>
+              <div className="glass-card p-3 border-0 text-center h-100">
+                <small className="text-muted d-block text-uppercase mb-1">Qty</small>
                 <strong>{book.quantity}</strong>
               </div>
             </div>
             <div className="col-md-6 col-lg-3 col-6">
-              <div className="border border-secondary border-opacity-10 rounded-3 p-3 text-center">
+              <div className="glass-card p-3 border-0 text-center h-100">
                 <small className="text-muted d-block text-uppercase mb-1">Publisher</small>
                 <span className="text-truncate d-block" title={book.publisher}>{book.publisher || 'N/A'}</span>
               </div>
@@ -141,7 +139,7 @@ const BookDetails = () => {
           </div>
 
           <div className="mb-4">
-            <h5 className="fw-bold heading-font mb-3">Book Description</h5>
+            <h5 className="fw-bold heading-font mb-3">Book description</h5>
             <p className="text-muted lh-lg" style={{ whiteSpace: 'pre-wrap' }}>
               {book.description || 'No description available for this book.'}
             </p>
@@ -149,51 +147,46 @@ const BookDetails = () => {
 
           <div className="row g-4">
             <div className="col-md-6">
-              <h5 className="fw-bold heading-font mb-3">Book Specifications</h5>
+              <h5 className="fw-bold heading-font mb-3">Book specifications</h5>
               <table className="table table-borderless text-muted mb-0">
                 <tbody>
                   <tr>
                     <td className="ps-0 py-1" style={{ width: '120px' }}>ISBN-13:</td>
-                    <td className="py-1 text-white">{book.isbn || 'N/A'}</td>
+                    <td className="py-1" style={{ color: 'var(--text-color)' }}>{book.isbn || 'N/A'}</td>
                   </tr>
                   <tr>
                     <td className="ps-0 py-1">Publisher:</td>
-                    <td className="py-1 text-white">{book.publisher || 'N/A'}</td>
+                    <td className="py-1" style={{ color: 'var(--text-color)' }}>{book.publisher || 'N/A'}</td>
                   </tr>
                   <tr>
-                    <td className="ps-0 py-1">Shelf Code:</td>
-                    <td className="py-1 text-white">{book.shelfNumber || 'N/A'}</td>
+                    <td className="ps-0 py-1">Shelf code:</td>
+                    <td className="py-1" style={{ color: 'var(--text-color)' }}>{book.shelfNumber || 'N/A'}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            {/* Visual Floor Map Location (WOW factor!) */}
             <div className="col-md-6">
-              <h5 className="fw-bold heading-font mb-3">Location inside Library</h5>
-              <div className="glass-card p-3 border-0 bg-opacity-25 shadow-sm">
+              <h5 className="fw-bold heading-font mb-3">Library location</h5>
+              <div className="glass-card p-3 border-0 shadow-sm">
                 <div className="d-flex justify-content-between align-items-center mb-2">
-                  <small className="text-muted">Interactive Floor Layout (2nd Floor)</small>
-                  <span className="badge bg-primary">Zone {section}</span>
+                  <small className="text-muted">Interactive floor layout (2nd floor)</small>
+                  <span className="badge rounded-pill" style={{ background: 'rgba(31, 111, 102, 0.12)', color: 'var(--primary-color)' }}>Zone {section}</span>
                 </div>
-                <div className="bg-dark p-3 rounded border border-secondary border-opacity-10 d-grid" style={{
-                  gridTemplateColumns: 'repeat(5, 1fr)',
-                  gap: '8px',
-                  minHeight: '120px'
-                }}>
+                <div className="bg-dark p-3 rounded border border-secondary border-opacity-10 d-grid" style={{ gridTemplateColumns: 'repeat(5, 1fr)', gap: '8px', minHeight: '120px' }}>
                   {libraryMapSections.map((sec) => (
-                    <div 
+                    <div
                       key={sec}
-                      className={`d-flex align-items-center justify-content-center rounded fw-bold text-center`}
+                      className="d-flex align-items-center justify-content-center rounded fw-bold text-center"
                       style={{
                         height: '40px',
                         fontSize: '0.85rem',
                         transition: 'all 0.3s ease',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        backgroundColor: sec === section ? 'rgba(99, 102, 241, 0.8)' : 'rgba(255, 255, 255, 0.05)',
-                        color: sec === section ? '#fff' : 'rgba(255, 255, 255, 0.4)',
-                        boxShadow: sec === section ? '0 0 10px rgba(99, 102, 241, 0.5)' : 'none',
-                        transform: sec === section ? 'scale(1.05)' : 'none'
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        backgroundColor: sec === section ? 'rgba(31, 111, 102, 0.85)' : 'rgba(255,255,255,0.05)',
+                        color: sec === section ? '#fff' : 'rgba(255,255,255,0.4)',
+                        boxShadow: sec === section ? '0 0 16px rgba(31, 111, 102, 0.35)' : 'none',
+                        transform: sec === section ? 'scale(1.04)' : 'none'
                       }}
                     >
                       {sec}
@@ -201,8 +194,8 @@ const BookDetails = () => {
                   ))}
                 </div>
                 <div className="d-flex gap-2 align-items-center mt-2 small text-muted">
-                  <i className="bi bi-info-circle text-info"></i>
-                  <span>Locate Shelf <strong>{book.shelfNumber}</strong> in the highlighted zone.</span>
+                  <i className="bi bi-info-circle" style={{ color: 'var(--accent-color)' }}></i>
+                  <span>Locate shelf <strong>{book.shelfNumber}</strong> in the highlighted zone.</span>
                 </div>
               </div>
             </div>

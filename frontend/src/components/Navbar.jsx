@@ -9,28 +9,30 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   const handleLogout = () => {
     localStorage.removeItem('isAdmin');
     navigate('/');
-    window.dispatchEvent(new Event('storage')); // Notify components of state changes
+    window.dispatchEvent(new Event('storage'));
   };
 
-  const isActive = (path) => location.pathname === path ? 'active' : '';
+  const isActive = (path) => (location.pathname === path ? 'active' : '');
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark glass-navbar py-3">
+    <nav className="navbar navbar-expand-lg glass-navbar py-3">
       <div className="container">
         <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
-          <div className="gradient-bg d-flex align-items-center justify-content-center rounded-circle" style={{ width: '40px', height: '40px' }}>
+          <div className="gradient-bg d-flex align-items-center justify-content-center rounded-circle" style={{ width: '42px', height: '42px' }}>
             <i className="bi bi-book-half text-white fs-5"></i>
           </div>
-          <span className="heading-font fw-bold text-white fs-4">Libri<span className="text-info">AI</span></span>
+          <span className="heading-font fw-bold fs-4" style={{ color: 'var(--text-color)' }}>
+            Libri<span className="gradient-text">AI</span>
+          </span>
         </Link>
 
-        <button 
-          className="navbar-toggler border-0" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#navbarNav" 
-          aria-controls="navbarNav" 
-          aria-expanded="false" 
+        <button
+          className="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
@@ -39,50 +41,48 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-1 ms-lg-3">
             <li className="nav-item">
-              <Link className={`nav-link text-white-50 px-3 rounded-pill ${isActive('/') ? 'text-white bg-primary bg-opacity-25' : ''}`} to="/">Home</Link>
+              <Link className={`nav-link px-3 rounded-pill ${isActive('/')}`} to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link text-white-50 px-3 rounded-pill ${isActive('/search') ? 'text-white bg-primary bg-opacity-25' : ''}`} to="/search">Search</Link>
+              <Link className={`nav-link px-3 rounded-pill ${isActive('/search')}`} to="/search">Search</Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link text-white-50 px-3 rounded-pill ${isActive('/books') ? 'text-white bg-primary bg-opacity-25' : ''}`} to="/books">Book Catalog</Link>
+              <Link className={`nav-link px-3 rounded-pill ${isActive('/books')}`} to="/books">Book Catalog</Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link text-white-50 px-3 rounded-pill ${isActive('/ai-chat') ? 'text-white bg-primary bg-opacity-25' : ''}`} to="/ai-chat">
+              <Link className={`nav-link px-3 rounded-pill ${isActive('/ai-chat')}`} to="/ai-chat">
                 <i className="bi bi-robot me-1"></i> AI Assistant
               </Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link text-white-50 px-3 rounded-pill ${isActive('/faq') ? 'text-white bg-primary bg-opacity-25' : ''}`} to="/faq">FAQs</Link>
+              <Link className={`nav-link px-3 rounded-pill ${isActive('/faq')}`} to="/faq">FAQs</Link>
             </li>
           </ul>
 
-          <div className="d-flex align-items-center gap-3 mt-3 mt-lg-0">
-            {/* Theme Toggle */}
-            <button 
-              className="btn btn-link text-white p-2 theme-switch" 
+          <div className="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+            <button
+              className="btn btn-link p-2 theme-switch"
               onClick={toggleDarkMode}
-              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             >
               {darkMode ? (
                 <i className="bi bi-sun-fill text-warning fs-5"></i>
               ) : (
-                <i className="bi bi-moon-stars-fill text-info fs-5"></i>
+                <i className="bi bi-moon-stars-fill fs-5" style={{ color: 'var(--primary-color)' }}></i>
               )}
             </button>
 
-            {/* Admin Controls */}
             {isAdmin ? (
               <>
-                <Link className="btn btn-outline-info rounded-pill px-4 d-flex align-items-center gap-2" to="/admin">
-                  <i className="bi bi-grid-1x2-fill"></i> Admin Panel
+                <Link className="btn btn-outline-secondary rounded-pill px-3 d-flex align-items-center gap-2" to="/admin">
+                  <i className="bi bi-grid-1x2-fill"></i> Admin
                 </Link>
-                <button className="btn btn-danger rounded-pill px-4" onClick={handleLogout}>
+                <button className="btn btn-primary rounded-pill px-3" onClick={handleLogout}>
                   Logout
                 </button>
               </>
             ) : (
-              <Link className="btn btn-outline-light rounded-pill px-4" to="/admin-login">
+              <Link className="btn btn-primary rounded-pill px-3" to="/admin-login">
                 Librarian Portal
               </Link>
             )}

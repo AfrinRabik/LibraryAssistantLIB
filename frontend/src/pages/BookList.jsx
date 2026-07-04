@@ -125,8 +125,9 @@ const BookList = () => {
       <div className="row g-4 mb-5">
         <div className="col-12 text-center text-lg-start d-lg-flex justify-content-between align-items-center">
           <div>
+            <div className="section-chip mb-2">Curated catalog</div>
             <h1 className="fw-extrabold heading-font display-6 mb-1">Book Catalog</h1>
-            <p className="text-muted">Browse our collection of technology and computer science books.</p>
+            <p className="text-muted mb-0">Browse our collection of technology, engineering, and computer science books.</p>
           </div>
           <button className="btn btn-outline-secondary rounded-pill px-4" onClick={clearFilters}>
             Reset Catalog
@@ -135,18 +136,16 @@ const BookList = () => {
       </div>
 
       <div className="row g-4">
-        {/* Sidebar Filters */}
         <div className="col-lg-3">
           <div className="glass-card p-4 border-0 mb-4">
-            <h5 className="fw-bold mb-3 heading-font">Search & Filters</h5>
-            
-            {/* Search Form */}
+            <h5 className="fw-bold mb-3 heading-font">Search & filter</h5>
+
             <form onSubmit={handleSearchSubmit} className="mb-4">
-              <label className="form-label text-muted small">Search Keyword</label>
+              <label className="form-label text-muted small">Search keyword</label>
               <div className="input-group">
-                <input 
-                  type="text" 
-                  className="form-control" 
+                <input
+                  type="text"
+                  className="form-control"
                   placeholder="Enter title, author..."
                   value={localSearch}
                   onChange={(e) => setLocalSearch(e.target.value)}
@@ -157,44 +156,38 @@ const BookList = () => {
               </div>
             </form>
 
-            {/* Sorting */}
             <div className="mb-4">
-              <label className="form-label text-muted small">Sort By</label>
+              <label className="form-label text-muted small">Sort by</label>
               <div className="d-flex gap-2">
                 <select className="form-select" value={sortBy} onChange={handleSortChange}>
-                  <option value="title">Book Title</option>
-                  <option value="author">Author Name</option>
-                  <option value="shelfNumber">Shelf Location</option>
-                  <option value="quantity">Stock Quantity</option>
-                  <option value="createdAt">Date Added</option>
+                  <option value="title">Book title</option>
+                  <option value="author">Author</option>
+                  <option value="shelfNumber">Shelf location</option>
+                  <option value="quantity">Stock quantity</option>
+                  <option value="createdAt">Date added</option>
                 </select>
-                <button 
-                  type="button" 
-                  className="btn btn-outline-secondary px-3" 
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary px-3"
                   onClick={handleDirectionToggle}
                   title={`Currently: ${sortDirection.toUpperCase()}`}
                 >
-                  {sortDirection === 'asc' ? (
-                    <i className="bi bi-sort-up"></i>
-                  ) : (
-                    <i className="bi bi-sort-down"></i>
-                  )}
+                  {sortDirection === 'asc' ? <i className="bi bi-sort-up"></i> : <i className="bi bi-sort-down"></i>}
                 </button>
               </div>
             </div>
 
-            {/* Category Filter */}
             <div>
               <label className="form-label text-muted small d-block mb-2">Category</label>
               <div className="d-flex flex-column gap-2">
-                <button 
+                <button
                   className={`btn btn-sm text-start rounded-3 px-3 py-2 ${!selectedCategory ? 'btn-primary' : 'btn-outline-secondary'}`}
                   onClick={() => handleCategorySelect('')}
                 >
-                  All Categories
+                  All categories
                 </button>
                 {categories.map((cat, idx) => (
-                  <button 
+                  <button
                     key={idx}
                     className={`btn btn-sm text-start rounded-3 px-3 py-2 ${selectedCategory.toLowerCase() === cat.toLowerCase() ? 'btn-primary' : 'btn-outline-secondary'}`}
                     onClick={() => handleCategorySelect(cat)}
@@ -207,30 +200,29 @@ const BookList = () => {
           </div>
         </div>
 
-        {/* Catalog Grid */}
         <div className="col-lg-9">
           {loading ? (
             <div className="d-flex justify-content-center align-items-center py-5" style={{ minHeight: '300px' }}>
-              <div className="spinner-border text-primary" role="status" style={{ width: '3rem', height: '3rem' }}>
+              <div className="spinner-border" role="status" style={{ width: '3rem', height: '3rem', color: 'var(--primary-color)' }}>
                 <span className="visually-hidden">Loading...</span>
               </div>
             </div>
           ) : error ? (
             <div className="glass-card p-5 text-center border-0 text-danger fade-in">
               <i className="bi bi-exclamation-triangle-fill display-3 mb-3 text-warning"></i>
-              <h4 className="fw-bold">Connection Issue</h4>
+              <h4 className="fw-bold">Connection issue</h4>
               <p className="text-muted">{error}</p>
               <button className="btn btn-primary rounded-pill px-4 mt-3" onClick={() => window.location.reload()}>
-                Try Again
+                Try again
               </button>
             </div>
           ) : books.length === 0 ? (
             <div className="glass-card p-5 text-center border-0 fade-in">
               <i className="bi bi-book-half display-3 mb-3 text-muted"></i>
-              <h4 className="fw-bold">No Books Found</h4>
+              <h4 className="fw-bold">No books found</h4>
               <p className="text-muted">We couldn't find any books matching your filters or search keywords.</p>
-              <button className="btn btn-outline-primary rounded-pill px-4 mt-2" onClick={clearFilters}>
-                Clear Search
+              <button className="btn btn-outline-secondary rounded-pill px-4 mt-2" onClick={clearFilters}>
+                Clear search
               </button>
             </div>
           ) : (

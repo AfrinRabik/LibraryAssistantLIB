@@ -39,9 +39,9 @@ function App() {
 
   return (
     <Router>
-      <div className="d-flex flex-column min-vh-100">
+      <div className="d-flex flex-column min-vh-100 page-shell">
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        <main className="flex-grow-1">
+        <main className="flex-grow-1 position-relative">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/books" element={<BookList />} />

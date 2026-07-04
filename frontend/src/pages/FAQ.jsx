@@ -38,34 +38,35 @@ const FAQ = () => {
     <div className="container py-5 position-relative fade-in" style={{ minHeight: '80vh' }}>
       <div className="orb orb-1"></div>
       <div className="orb orb-2"></div>
-      
+
       <div className="row justify-content-center">
         <div className="col-lg-8">
           <div className="text-center mb-5">
+            <div className="section-chip mb-3">Helpful answers</div>
             <h1 className="fw-extrabold heading-font display-6 mb-2">Library FAQs</h1>
-            <p className="text-muted">Quick answers to frequently asked questions about library policies, rules, and timings.</p>
+            <p className="text-muted">Quick answers to common questions about library access, borrowing, and support.</p>
           </div>
 
           <div className="accordion accordion-flush d-flex flex-column gap-3" id="faqAccordion">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="accordion-item glass-card border-0 overflow-hidden rounded-3 shadow-sm">
+              <div key={idx} className="accordion-item glass-card border-0 overflow-hidden rounded-4 shadow-sm">
                 <h2 className="accordion-header" id={`heading${faq.id}`}>
-                  <button 
-                    className="accordion-button collapsed bg-transparent text-white fw-bold py-3 px-4" 
-                    type="button" 
-                    data-bs-toggle="collapse" 
-                    data-bs-target={`#${faq.id}`} 
-                    aria-expanded="false" 
+                  <button
+                    className="accordion-button collapsed bg-transparent fw-bold py-3 px-4"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#${faq.id}`}
+                    aria-expanded="false"
                     aria-controls={faq.id}
-                    style={{ color: 'var(--text-color) !important', boxShadow: 'none' }}
+                    style={{ color: 'var(--text-color)', boxShadow: 'none' }}
                   >
-                    <span style={{ color: 'var(--text-color)' }}>{faq.question}</span>
+                    <span>{faq.question}</span>
                   </button>
                 </h2>
-                <div 
-                  id={faq.id} 
-                  className="accordion-collapse collapse" 
-                  aria-labelledby={`heading${faq.id}`} 
+                <div
+                  id={faq.id}
+                  className="accordion-collapse collapse"
+                  aria-labelledby={`heading${faq.id}`}
                   data-bs-parent="#faqAccordion"
                 >
                   <div className="accordion-body px-4 pb-4 pt-1 text-muted lh-lg" style={{ fontSize: '0.95rem' }}>
@@ -77,10 +78,10 @@ const FAQ = () => {
           </div>
 
           <div className="glass-card p-4 border-0 rounded-4 text-center mt-5 shadow-sm">
-            <h5 className="fw-bold heading-font mb-2">Need further assistance?</h5>
-            <p className="text-muted mb-3" style={{ fontSize: '0.9rem' }}>You can chat with our AI Library Assistant for immediate responses to complex queries or book searches.</p>
+            <h5 className="fw-bold heading-font mb-2">Need more help?</h5>
+            <p className="text-muted mb-3" style={{ fontSize: '0.95rem' }}>Chat with the AI assistant for a faster answer about books, shelving, or library rules.</p>
             <Link to="/ai-chat" className="btn btn-primary rounded-pill px-4">
-              Ask AI Assistant
+              Ask AI assistant
             </Link>
           </div>
         </div>

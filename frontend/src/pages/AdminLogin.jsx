@@ -40,8 +40,8 @@ const AdminLogin = () => {
           <div className="gradient-bg d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style={{ width: '60px', height: '60px' }}>
             <i className="bi bi-shield-lock-fill text-white fs-3"></i>
           </div>
-          <h3 className="fw-bold heading-font mb-1">Librarian Login</h3>
-          <p className="text-muted small">Access inventory and shelf management systems</p>
+          <h3 className="fw-bold heading-font mb-1">Librarian login</h3>
+          <p className="text-muted small">Access the inventory and shelf management system</p>
         </div>
 
         {error && (
@@ -53,10 +53,10 @@ const AdminLogin = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label text-muted small">Username</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               name="username"
-              className="form-control" 
+              className="form-control"
               placeholder="Enter username"
               value={credentials.username}
               onChange={handleChange}
@@ -65,10 +65,10 @@ const AdminLogin = () => {
           </div>
           <div className="mb-4">
             <label className="form-label text-muted small">Password</label>
-            <input 
-              type="password" 
+            <input
+              type="password"
               name="password"
-              className="form-control" 
+              className="form-control"
               placeholder="Enter password"
               value={credentials.password}
               onChange={handleChange}
@@ -80,14 +80,14 @@ const AdminLogin = () => {
               <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             ) : (
               <>
-                <i className="bi bi-box-arrow-in-right"></i> Sign In
+                <i className="bi bi-box-arrow-in-right"></i> Sign in
               </>
             )}
           </button>
         </form>
-        
+
         <div className="text-center mt-3 text-muted small">
-          Demo login: <code className="bg-dark bg-opacity-25 px-1 py-0.5 rounded text-info">admin</code> / <code className="bg-dark bg-opacity-25 px-1 py-0.5 rounded text-info">admin</code>
+          Demo login: <span className="badge rounded-pill" style={{ background: 'rgba(31, 111, 102, 0.12)', color: 'var(--primary-color)' }}>admin / admin</span>
         </div>
       </div>
     </div>
